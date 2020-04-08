@@ -15,10 +15,9 @@ const BotCard = props => {
       <div
         className="ui card"
         key={props.bot.id}
-        onClick={() => 
-          {props.yourBots.includes(props.bot) ? null : props.selectBot(props.bot)}}
       >
-        <div className="image">
+        <div className="image"
+          onClick={() => { props.yourBots.includes(props.bot) ? null : props.selectBot(props.bot) }}>
           <img alt="oh no!" src={props.bot.avatar_url} />
         </div>
         <div className="content">
@@ -49,7 +48,7 @@ const BotCard = props => {
               <button
                 className="ui mini red button"
                 onClick={() =>
-                  props.botDischarge(props.id)
+                  props.botDischarge(props.bot)
                 }
               >
                 x

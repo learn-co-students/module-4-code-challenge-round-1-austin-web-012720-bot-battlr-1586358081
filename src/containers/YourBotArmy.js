@@ -14,6 +14,7 @@ class YourBotArmy extends Component {
               return <YourBotCard
                 key={index}
                 bot={bot}
+                yourBots={this.props.yourBots}
                 releaseBot={this.props.releaseBot}
               >
               </YourBotCard>

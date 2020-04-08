@@ -25,6 +25,7 @@ class BotsPage extends Component {
   }
 
   selectBot = (bot) => {
+    console.log('adding bot')
     let botList = this.state.yourBots.slice()
     botList.push(bot)
     this.setState({
@@ -32,60 +33,48 @@ class BotsPage extends Component {
     })
   }
 
-  // Couldn't get bot removal from YourBotArmy to work fully right, still testing
   releaseBot = (bot) => {
-    console.log('releasing bot')
-    let botList = this.state.yourBots
-    let newArray = []
-    // if (botList.includes(bot)) {
-      newArray = botList.splice(botList.indexOf(bot), botList.indexOf(bot) + 1)
-    // }
-    this.setState({
-      yourBots: newArray
-    })
+    let yourBotsArray = this.state.yourBots;
+    let yourBotsIndex = this.state.yourBots.indexOf(bot);
+    console.log(yourBotsIndex)
+    if (yourBotsIndex > -1) {
+      yourBotsArray.splice(yourBotsIndex, 1);
+      this.setState({
+        yourBots: yourBotsArray
+      })
+    }
   }
 
-  // Method will delete bots from backend - need refresh to see, working on removing from YourBotArmy
-  botDischarge = (botID) => {
-    let botList = this.state.yourBots
-    let newArray = []
+  botDischarge = (bot) => {
     console.log('discharging bot')
-    fetch(`${API}/${botID}`, {
+    this.releaseBot(bot)
+    console.log('deleting bot')
+    fetch(`${API}/${bot.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },
-      // body: JSON.stringify({
-      //   id: botID
-      //   }
     })
-    // for (let i = botList.length-1; i++;){
-    //   if (botList[i] === botID) botList.splice(i, 1);
-    // }
-    if (botList.includes(botID)) {
-      newArray = botList.splice(botList.indexOf(botID), 1)
-    }
-    this.setState({
-      yourBots: newArray
-    })
+    .then(response => response.json())
+    .then(data => this.componentDidMount())
   }
 
-render() {
-  return <div>
-    <YourBotArmy
-      yourBots={this.state.yourBots}
-      releaseBot={this.releaseBot}
-      yourBots={this.state.yourBots}
-    />
-    <BotCollection
-      bots={this.state.botList}
-      selectBot={this.selectBot}
-      yourBots={this.state.yourBots}
-      botDischarge={this.botDischarge}
-    />
-  </div>;
-}
+  render() {
+    return <div>
+      <YourBotArmy
+        yourBots={this.state.yourBots}
+        releaseBot={this.releaseBot}
+        yourBots={this.state.yourBots}
+      />
+      <BotCollection
+        bots={this.state.botList}
+        selectBot={this.selectBot}
+        yourBots={this.state.yourBots}
+        botDischarge={this.botDischarge}
+      />
+    </div>;
+  }
 }
 
 export default BotsPage;
