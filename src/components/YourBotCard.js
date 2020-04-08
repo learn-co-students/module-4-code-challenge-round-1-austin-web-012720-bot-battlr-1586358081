@@ -9,14 +9,14 @@ const botTypeClasses = {
   Captain: "icon star"
 };
 
-const BotCard = props => {
+const YourBotCard = props => {
   return (
     <div className="ui column">
       <div
         className="ui card"
         key={props.bot.id}
         onClick={() => 
-          {props.yourBots.includes(props.bot) ? null : props.selectBot(props.bot)}}
+          {props.releaseBot(props.bot)}}
       >
         <div className="image">
           <img alt="oh no!" src={props.bot.avatar_url} />
@@ -44,22 +44,22 @@ const BotCard = props => {
             <i className="icon shield" />
             {props.bot.armor}
           </span>
-          <span>
+          {/* <span>
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini red button"
                 onClick={() =>
-                  props.botDischarge(props.id)
+                  console.log("add code to connect event listener")
                 }
               >
                 x
               </button>
             </div>
-          </span>
+          </span> */}
         </div>
       </div>
     </div>
   );
 };
 
-export default BotCard;
+export default YourBotCard;
