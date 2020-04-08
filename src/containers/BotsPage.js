@@ -71,9 +71,8 @@ class BotsPage extends Component {
 
   render() {
     return <div>
-      <BotCollection bots={this.state.bots} addBot={this.addBotToArmy} deleteBot={this.deleteBot}/>
       <YourBotArmy bots={this.state.botArmy} releaseBot={this.releaseBot}/>
-
+      <BotCollection bots={this.state.bots} addBot={this.addBotToArmy} deleteBot={this.deleteBot}/>
     </div>;
   }
 }
