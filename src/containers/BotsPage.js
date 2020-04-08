@@ -10,7 +10,7 @@ class BotsPage extends Component {
 
     this.state = {
       bots: [],
-      yourbotarmy: false
+      army: []
     };
   };
 
@@ -23,8 +23,8 @@ class BotsPage extends Component {
   render() {
     return (
       <div>
-        <YourBotArmy yourbotarmy={this.state.yourbotarmy}/>
-        <BotCollection bots={this.state.bots} yourbotarmy={this.state.yourbotarmy} />
+        <YourBotArmy army={this.state.army}/>
+        <BotCollection bots={this.state.bots} army={this.state.army} />
       </div>
     );
   }
