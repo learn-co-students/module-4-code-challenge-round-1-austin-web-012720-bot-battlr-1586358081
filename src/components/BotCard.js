@@ -15,9 +15,11 @@ const BotCard = props => {
       <div
         className="ui card"
         key={props.bot.id}
-        onClick={() => console.log("add code to connect event listener")}
-      >
-        <div className="image">
+        // onClick={() => props.handleEnlistClick(props.bot.id)}   ////
+        >
+        <div className="image"
+            onClick={() => props.handleEnlistClick(props.bot.id)}   ////moved from above to prevent click war
+        >
           <img alt="oh no!" src={props.bot.avatar_url} />
         </div>
         <div className="content">
@@ -47,9 +49,7 @@ const BotCard = props => {
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini red button"
-                onClick={() =>
-                  console.log("add code to connect event listener")
-                }
+                onClick={() => props.handleRemoveClick(props.bot.id)}   /////////
               >
                 x
               </button>
