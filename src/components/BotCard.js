@@ -9,39 +9,50 @@ const botTypeClasses = {
   Captain: "icon star"
 };
 
-const BotCard = props => {
-  return (
-    <div className="ui column">
-      <div
-        className="ui card"
-        key={props.bot.id}
-        onClick={() => console.log("add code to connect event listener")}
-      >
+class BotCard extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      yourbotarmy: props.yourbotarmy
+    };
+  };
+
+  render() {
+    return (
+      <div className="ui column">
+        <div
+          className="ui card"
+          key={this.props.bot.id}
+          onClick={() => {
+            this.setState({ yourbotarmy: !this.state.yourbotarmy})
+          }}
+        >
         <div className="image">
-          <img alt="oh no!" src={props.bot.avatar_url} />
+          <img alt="oh no!" src={this.props.bot.avatar_url} />
         </div>
         <div className="content">
           <div className="header">
-            {props.bot.name}
-            <i className={botTypeClasses[props.bot.bot_class]} />
+            {this.props.bot.name}
+            <i className={botTypeClasses[this.props.bot.bot_class]} />
           </div>
           <div className="meta text-wrap">
-            <small>{props.bot.catchphrase}</small>
+            <small>{this.props.bot.catchphrase}</small>
           </div>
         </div>
         <div className="extra content">
           <span>
             <i className="icon heartbeat" />
-            {props.bot.health}
+            {this.props.bot.health}
           </span>
 
           <span>
             <i className="icon lightning" />
-            {props.bot.damage}
+            {this.props.bot.damage}
           </span>
           <span>
             <i className="icon shield" />
-            {props.bot.armor}
+            {this.props.bot.armor}
           </span>
           <span>
             <div className="ui center aligned segment basic">
@@ -57,8 +68,9 @@ const BotCard = props => {
           </span>
         </div>
       </div>
-    </div>
-  );
+      </div >
+    );
+  };
 };
 
 export default BotCard;
