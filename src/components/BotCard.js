@@ -1,4 +1,5 @@
 import React from "react";
+import YourBotArmy  from '../containers/YourBotArmy.js'
 
 const botTypeClasses = {
   Assault: "icon military",
@@ -15,8 +16,7 @@ const BotCard = props => {
       <div
         className="ui card"
         key={props.bot.id}
-        onClick={() => console.log("add code to connect event listener")}
-      >
+        onClick={() => this.props.callback}>
         <div className="image">
           <img alt="oh no!" src={props.bot.avatar_url} />
         </div>

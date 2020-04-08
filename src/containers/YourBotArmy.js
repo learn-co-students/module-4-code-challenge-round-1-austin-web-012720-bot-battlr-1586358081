@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import BotCard from "../components/BotCard";
 
 class YourBotArmy extends Component {
   //your bot army code here...
@@ -6,10 +7,11 @@ class YourBotArmy extends Component {
   render() {
     return (
       <div className="ui segment inverted olive bot-army">
+      {console.log('WE MADE IT')}
+            Your Bot Army
         <div className="ui five column grid">
           <div className="row bot-army-row">
-            {/*...and here...*/}
-            Your Bot Army
+            {/* {<BotCard bot={this.props.bot}/>} */}
           </div>
         </div>
       </div>
