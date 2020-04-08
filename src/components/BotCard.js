@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 
 const botTypeClasses = {
   Assault: "icon military",
@@ -6,60 +6,72 @@ const botTypeClasses = {
   Support: "icon plus circle",
   Medic: "icon ambulance",
   Witch: "icon magic",
-  Captain: "icon star"
+  Captain: "icon star",
 };
 
+class BotCard extends Component {
+  constructor(props) {
+    super(props);
 
-const BotCard = props => {
-  return (
-    <div className="ui column">
-      <div
-        className="ui card"
-        key={props.bot.id}
-        onClick={(event) => props.handleClick(event)}
-      >
-        <div className="image">
-          <img alt="oh no!" src={props.bot.avatar_url} />
-        </div>
-        <div className="content">
-          <div className="header">
-            {props.bot.name}
-            <i className={botTypeClasses[props.bot.bot_class]} />
-          </div>
-          <div className="meta text-wrap">
-            <small>{props.bot.catchphrase}</small>
-          </div>
-        </div>
-        <div className="extra content">
-          <span>
-            <i className="icon heartbeat" />
-            {props.bot.health}
-          </span>
+    this.state = {
+      clicked: false,
+    };
+  }
 
-          <span>
-            <i className="icon lightning" />
-            {props.bot.damage}
-          </span>
-          <span>
-            <i className="icon shield" />
-            {props.bot.armor}
-          </span>
-          <span>
-            <div className="ui center aligned segment basic">
-              <button
-                className="ui mini red button"
-                onClick={() =>
-                  console.log("add code to connect event listener")
-                }
-              >
-                x
-              </button>
+  handleClick = (event) => {
+    this.setState({ clicked: !this.state.clicked });
+  };
+
+  render() {
+    return (
+      <div className="ui column">
+        <div
+          className="ui card"
+          key={this.props.bot.id}
+          onClick={this.handleClick}
+        >
+          <div className="image">
+            <img alt="oh no!" src={this.props.bot.avatar_url} />
+          </div>
+          <div className="content">
+            <div className="header">
+              {this.props.bot.name}
+              <i className={botTypeClasses[this.props.bot.bot_class]} />
             </div>
-          </span>
+            <div className="meta text-wrap">
+              <small>{this.props.bot.catchphrase}</small>
+            </div>
+          </div>
+          <div className="extra content">
+            <span>
+              <i className="icon heartbeat" />
+              {this.props.bot.health}
+            </span>
+
+            <span>
+              <i className="icon lightning" />
+              {this.props.bot.damage}
+            </span>
+            <span>
+              <i className="icon shield" />
+              {this.props.bot.armor}
+            </span>
+            <span>
+              <div className="ui center aligned segment basic">
+                <button
+                  className="ui mini red button"
+                  onClick={() =>
+                    console.log("add code to connect event listener")
+                  }
+                >
+                  x
+                </button>
+              </div>
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
-
+    );
+  }
+}
 export default BotCard;

@@ -5,13 +5,11 @@ import BotCollection from "./BotCollection";
 const URL = "http://localhost:6001/bots";
 
 class BotsPage extends Component {
-  //start here with your code for step one
   constructor() {
     super();
 
     this.state = {
       bots: [],
-      botArmy: []
     };
   }
 
@@ -30,13 +28,22 @@ class BotsPage extends Component {
     console.log("Bots fetched...");
   };
 
+  addToArmy = () => {
+    console.log("Adding to army...");
+  };
 
   render() {
     console.log(this.state.bots);
     return (
       <div>
-        <YourBotArmy bots={this.state.bots} botArmy={this.state.botArmy}/>
-        <BotCollection bots={this.state.bots} botArmy={this.state.botArmy}/>
+        <YourBotArmy
+          bots={
+            this.state.bots.filter(function (bot) {
+              return bot 
+            }) // return bot with state.clicked === true
+          }
+        />
+        <BotCollection bots={this.state.bots} addToArmy={this.addToArmy} />
       </div>
     );
   }
