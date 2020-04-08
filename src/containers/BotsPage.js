@@ -45,6 +45,7 @@ class BotsPage extends Component {
     }
   }
 
+  // Only works for first bot -- subsequent bots are not getting removed from BotArmy properly
   botDischarge = (bot) => {
     console.log('discharging bot')
     this.releaseBot(bot)
