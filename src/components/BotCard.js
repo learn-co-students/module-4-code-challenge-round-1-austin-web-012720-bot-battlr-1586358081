@@ -10,14 +10,30 @@ const botTypeClasses = {
 };
 
 const BotCard = props => {
+  const DeleteOrRelease = () => {
+    if(props.deleteBot) {
+      props.deleteBot(props.bot)
+    } else {
+      props.releaseBot(props.bot)
+    }
+  }
+
+  const clickable = () => {
+    if(props.clickable) {
+      props.addBot(props.bot)
+    }
+  }
+
+  
+
   return (
-    <div className="ui column">
+    <div className="ui column" >
       <div
         className="ui card"
         key={props.bot.id}
         onClick={() => console.log("add code to connect event listener")}
       >
-        <div className="image">
+        <div className="image" onClick={() => clickable()}>
           <img alt="oh no!" src={props.bot.avatar_url} />
         </div>
         <div className="content">
@@ -47,9 +63,7 @@ const BotCard = props => {
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini red button"
-                onClick={() =>
-                  console.log("add code to connect event listener")
-                }
+                onClick={() => DeleteOrRelease()}
               >
                 x
               </button>
