@@ -6,7 +6,6 @@ class BotCollection extends Component {
 
   render() {
     const theBots = this.props.bots;
-    // let army = this.props.army;
 
     return (
       <div className="ui four column grid">

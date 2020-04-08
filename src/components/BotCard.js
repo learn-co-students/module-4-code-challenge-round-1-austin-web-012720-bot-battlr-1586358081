@@ -24,7 +24,7 @@ class BotCard extends React.Component {
           className="ui card"
           key={this.props.bot.id}
           onClick={() => {
-            this.setState({ drafted: !this.state.drafted }),
+            this.setState({ drafted: !this.state.drafted })
             this.state.drafted ? this.props.army.pop(this.props.bot) : this.props.army.push(this.props.bot)
           }}>
           <div className="image">
