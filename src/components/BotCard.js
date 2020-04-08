@@ -1,6 +1,4 @@
 import React from "react";
-// import YourBotArmy from "../containers/YourBotArmy";
-
 
 const botTypeClasses = {
   Assault: "icon military",
@@ -11,15 +9,13 @@ const botTypeClasses = {
   Captain: "icon star"
 };
 
-
 const BotCard = props => {
-
   return (
     <div className="ui column">
       <div
         className="ui card"
         key={props.bot.id}
-        onClick={() => console.log(props.bot.id)}  //look here!!
+        onClick={() => console.log('clicked')}
       >
         <div className="image">
           <img alt="oh no!" src={props.bot.avatar_url} />
@@ -51,8 +47,9 @@ const BotCard = props => {
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini red button"
-                onClick={() =>
-                  console.log("add code to connect event listener")
+                onClick={() => 
+                // console.log(props.bot.id)
+                props.deleteBot(props.bot.id)
                 }
               >
                 x
