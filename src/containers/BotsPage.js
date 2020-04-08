@@ -17,30 +17,39 @@ class BotsPage extends Component {
     .then(results => this.setState({ allBots: results}))  
   }
 
-  addToBotArmy = (bot) => {
-    if(!this.state.botArmy.includes(bot)){
-      this.setState({ botArmy: [...this.state.botArmy, bot] })
-    }
+  addToBotArmy = (newBot) => {
+      this.setState({ botArmy: [...this.state.botArmy, newBot] })
   }
-
-  releaseBot = (botToDelete) => {
-    const newArmy = this.state.botArmy.filter(bot => bot !== botToDelete)
+  
+  releaseBot = (botToRelease) => {
+    const newArmy = this.state.botArmy.filter(bot => bot !== botToRelease)
     this.setState({botArmy: newArmy})
   }
 
-  deleteBot = (bot) => {
-    const botId = bot.id
+  deleteBot = (botToDelete) => {
+    const botId = botToDelete.id
     fetch(`http://localhost:6001/bots/${botId}`, {
-      method: 'DELETE',
-
+      method: 'DELETE'
     })
+    const newBotsArray = this.state.allBots.filter(bot => bot !== botToDelete)
+    this.setState({ allBots: newBotsArray})
   }
 
   render() {
     return (
       <div>
-        <YourBotArmy botArmy={this.state.botArmy}  />
-        <BotCollection bots={this.state.allBots} addToBotArmy={this.addToBotArmy} deleteBot={this.deleteBot}/>
+        <YourBotArmy 
+        botArmy={this.state.botArmy} 
+        addToBotArmy={this.addToBotArmy} 
+        deleteBot={this.deleteBot} 
+        releaseBot={this.releaseBot} />
+        <BotCollection 
+        bots={this.state.allBots}
+        botArmy={this.state.botArmy} 
+        addToBotArmy={this.addToBotArmy} 
+        deleteBot={this.deleteBot}
+        releaseBot={this.releaseBot} 
+        />
       </div>
     );
   }

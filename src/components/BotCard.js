@@ -11,12 +11,20 @@ const botTypeClasses = {
 
 const BotCard = props => {
 
+  const handleClick = () => {
+    if(props.botArmy.includes(props.bot)) {
+      props.releaseBot(props.bot)
+    } else {
+    props.addToBotArmy(props.bot)
+    }
+  }
+
   return (
     <div className="ui column">
       <div
         className="ui card"
         key={props.bot.id}
-        onClick={() => props.addToBotArmy(props.bot)}
+        onClick={handleClick}
       >
         <div className="image">
           <img alt="oh no!" src={props.bot.avatar_url} />
