@@ -10,7 +10,8 @@ const botTypeClasses = {
 };
 
 const BotCard = props => {
-  const DeleteOrRelease = () => {
+  const DeleteOrRelease = (event) => {
+    event.preventDefault();
     if(props.deleteBot) {
       props.deleteBot(props.bot)
     } else {
@@ -63,7 +64,7 @@ const BotCard = props => {
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini red button"
-                onClick={() => DeleteOrRelease()}
+                onClick={(event) => DeleteOrRelease(event)}
               >
                 x
               </button>
