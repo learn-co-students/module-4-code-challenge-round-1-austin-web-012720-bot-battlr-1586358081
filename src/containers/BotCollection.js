@@ -14,6 +14,7 @@ class BotCollection extends Component {
           key={bot.id} 
           handleEnlistClick={this.props.handleClick}
           handleRemoveClick={this.props.handleRemoveClick}
+          handleCardClick={this.props.handleCardClick}
           /> )}
         </div>
       </div>

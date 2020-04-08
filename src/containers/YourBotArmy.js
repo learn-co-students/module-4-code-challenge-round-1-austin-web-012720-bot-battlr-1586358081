@@ -12,10 +12,12 @@ class YourBotArmy extends Component {
           <div className="row bot-army-row">
             {this.props.enlistedBots.map(bot => 
             <BotCard 
-            bot={bot} 
-            key={bot.id} 
+            bot={bot}
+            key={bot.id}
+            // enlistedPage={true}
             handleEnlistClick={this.props.handleClick}
             handleRemoveClick={this.props.handleRemoveClick}
+            handleCardClick={this.props.handleCardClick}
             />)}
           </div>
         </div>

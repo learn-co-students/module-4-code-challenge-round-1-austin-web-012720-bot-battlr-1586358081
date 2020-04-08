@@ -18,7 +18,7 @@ const BotCard = props => {
         // onClick={() => props.handleEnlistClick(props.bot.id)}   ////
         >
         <div className="image"
-            onClick={() => props.handleEnlistClick(props.bot.id)}   ////moved from above to prevent click war
+            onClick={() => props.handleCardClick(props.bot)}   ////moved from above to prevent click war
         >
           <img alt="oh no!" src={props.bot.avatar_url} />
         </div>

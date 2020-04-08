@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from "./YourBotArmy";
+import BotSpecs from '../components/BotSpecs'
 
 const baseUrl = 'http://localhost:6001/bots'
 
@@ -9,7 +10,9 @@ class BotsPage extends Component {
   constructor() {
     super()
     this.state = {
-      bots: []
+      bots: [],
+      showSpec: false,
+      curId: 0
     }
   }
 
@@ -27,8 +30,38 @@ class BotsPage extends Component {
     console.log(id);
     let bots = this.state.bots.slice(0);
     let curBot = bots.find(bot => bot.id === id);
+    console.log(curBot);
+    
     curBot.enlisted = !curBot.enlisted;
-    this.setState({bots})
+    this.setState(
+      {
+        bots: bots,
+        showSpec: false,
+        curId: 0
+      })
+  }
+
+  handleCardClick = (bot) => {
+    console.log('Card click', bot.id)
+    if (bot.enlisted) {
+      console.log('unenlist');
+      this.handleEnlistClick(bot.id);
+
+    } else {
+      this.setState({
+        showSpec: true,
+        curId: bot.id
+      })
+    }
+  }
+
+  handleBackClick = () => {
+    console.log('go Back!');
+
+    this.setState({
+      showSpec: false,
+      curId: 0
+    })
   }
 
   handleRemoveClick = (id) => {
@@ -37,14 +70,14 @@ class BotsPage extends Component {
     /// find and remove from state
     let bots = this.state.bots.slice(0);
     let res = bots.filter(bot => bot.id !== id)
-    this.setState({bots: res})
-    
+    this.setState({ bots: res })
+
     // remove from backend
     fetch(`${baseUrl}/${id}`, {
       method: 'DELETE'
     })
-    .then(res => res.json())
-    .then(json => console.log(json))
+      .then(res => res.json())
+      .then(json => console.log(json))
 
     // console.log(res);
   }
@@ -52,16 +85,27 @@ class BotsPage extends Component {
 
   render() {
     return <div>
-      <YourBotArmy 
-      enlistedBots={this.state.bots.filter(bot => bot.enlisted)} 
-      handleClick={this.handleEnlistClick}
-      handleRemoveClick={this.handleRemoveClick}
+      <YourBotArmy
+        enlistedBots={this.state.bots.filter(bot => bot.enlisted)}
+        // handleClick={this.handleEnlistClick}
+        handleRemoveClick={this.handleRemoveClick}
+        handleCardClick={this.handleCardClick}
       />
-      <BotCollection 
-      bots={this.state.bots} 
-      handleClick={this.handleEnlistClick}
-      handleRemoveClick={this.handleRemoveClick}
-      />
+
+      {this.state.showSpec ?
+        <BotSpecs
+          bot={this.state.bots.find(bot => bot.id === this.state.curId)}
+          handleEnlistClick={this.handleEnlistClick}
+          handleBackClick={this.handleBackClick}
+        />
+        :
+        <BotCollection
+          bots={this.state.bots}
+          // handleClick={this.handleEnlistClick}
+          handleRemoveClick={this.handleRemoveClick}
+          handleCardClick={this.handleCardClick}
+        />
+      }
     </div>;
   }
 }
