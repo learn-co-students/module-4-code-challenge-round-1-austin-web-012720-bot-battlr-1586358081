@@ -22,9 +22,6 @@ class BotCollection extends Component {
   }
 
   render() {
-    console.log('botcollection')
-    console.log(this.props)
-    console.log(this.props.currentBot)
     if(!this.props.currentBot.id){
     return (
       <div className="ui four column grid">
