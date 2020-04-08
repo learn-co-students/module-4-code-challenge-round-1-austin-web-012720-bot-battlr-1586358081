@@ -41,25 +41,31 @@ class BotsPage extends Component {
     fetch(`http://localhost:6001/bots/${id}`, {
       method: 'DELETE'
     })
-    .then(res => res.json())
-    .then(data => {
-      this.setState ({
-        bots: data
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          bots: data
+        })
       })
-    })
   }
 
-  // removeArmyBot = bot => {
-  //   const newArmy = this.state.army.filter
-  //   this.setState({
-  //     army: newArmy
-  //   })
-  // }
+  handleArmyRemove = bot => {
+    const index = this.state.army.indexOf(bot)
+    const army = this.state.army
+    const newArmy = this.state.army.splice(index, 1)
+    if (index > -1) {
+      newArmy.splice(index, 1)
+      this.setState({
+        army: army
+      })
+    }
+    //  ¯\_(ツ)_/¯
+  }
 
   render() {
     return <div>
-      <YourBotArmy army={this.state.army} removeArmyBot={this.removeArmyBot}/>
-      <BotCollection bots={this.state.bots} deleteBot={this.deleteBot} handleArmyAdd={this.handleArmyAdd}/>
+      <YourBotArmy army={this.state.army} deleteBot={this.deleteBot} handleArmyRemove={this.handleArmyRemove} />
+      <BotCollection bots={this.state.bots} handleArmyAdd={this.handleArmyAdd} />
     </div>;
   }
 }

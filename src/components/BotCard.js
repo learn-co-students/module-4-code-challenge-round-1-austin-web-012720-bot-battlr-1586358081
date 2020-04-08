@@ -15,11 +15,11 @@ const BotCard = props => {
       <div
         className="ui card"
         key={props.bot.id}
-        onClick={() => props.handleArmyAdd(props.bot)}
         // onClick={() => props.removeArmyBot(props.bot)}
-      >
-        <div className="image">
-          <img alt="oh no!" src={props.bot.avatar_url} />
+        >
+        <div className="image" >
+        
+          <img alt="oh no!" src={props.bot.avatar_url} onClick={() => props.handleImgClick(props.bot)}/>
         </div>
         <div className="content">
           <div className="header">
@@ -48,7 +48,7 @@ const BotCard = props => {
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini red button"
-                // onClick={() => deleteBot(this.props.bot)}
+                onClick={() => props.deleteBot(props.bot)}
               >
                 x
               </button>
