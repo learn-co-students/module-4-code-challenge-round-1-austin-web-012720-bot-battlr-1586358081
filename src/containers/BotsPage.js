@@ -25,7 +25,6 @@ class BotsPage extends Component {
 
   handleEnlistClick = (id) => {
     console.log(id);
-  
     let bots = this.state.bots.slice(0);
     let curBot = bots.find(bot => bot.id === id);
     curBot.enlisted = !curBot.enlisted;
