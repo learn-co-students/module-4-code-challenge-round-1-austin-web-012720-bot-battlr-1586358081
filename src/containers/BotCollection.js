@@ -6,13 +6,13 @@ class BotCollection extends Component {
 
   render() {
     const theBots = this.props.bots;
-    let army = this.props.army;
+    // let army = this.props.army;
 
     return (
       <div className="ui four column grid">
         <div className="row">
           {theBots.map(bot => (
-            <BotCard key={bot.id} bot={bot} army={army}/>
+            <BotCard key={bot.id} bot={bot} army={this.props.army}/>
           ))}
         </div>
       </div>
