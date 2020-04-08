@@ -11,7 +11,7 @@ class BotsPage extends Component {
 
     this.state = {
       bots: [],
-      botArmy: []
+      botArmy: [],
     };
   }
 
@@ -30,13 +30,26 @@ class BotsPage extends Component {
     console.log("Bots fetched...");
   };
 
+  addToArmy = (bot) => {
+    this.setState({ botArmy: [...this.state.botArmy, bot ]})
+    console.log(this.props.botArmy)
+
+  };
 
   render() {
     console.log(this.state.bots);
     return (
       <div>
-        <YourBotArmy bots={this.state.bots} botArmy={this.state.botArmy}/>
-        <BotCollection bots={this.state.bots} botArmy={this.state.botArmy}/>
+        <YourBotArmy
+          bots={this.state.bots}
+          botArmy={this.state.botArmy}
+          addToArmy={this.addToArmy}
+        />
+        <BotCollection
+          bots={this.state.bots}
+          botArmy={this.state.botArmy}
+          addToArmy={this.addToArmy}
+        />
       </div>
     );
   }

@@ -2,14 +2,19 @@ import React, { Component } from "react";
 import BotCard from "../components/BotCard";
 
 class BotCollection extends Component {
-
+constructor(props){
+  super()
+  this.state = {
+    clicked: false
+  }
+}
   handleClick = (event) => {
     console.log("Bot was clicked...")
     this.setState({
-      botArmy: []
-      // Tried to add the event.target.value to the botArmy
-      // use [...this.state.botArmy, "something"]
+      clicked: !this.state.clicked
     })
+    this.props.addToArmy(event)
+
   }
 
   render() {
@@ -21,6 +26,7 @@ class BotCollection extends Component {
               <BotCard
                 key={bot.id}
                 bot={bot}
+                clicked={this.state.clicked}
                 handleClick={this.handleClick}
               />
             );
