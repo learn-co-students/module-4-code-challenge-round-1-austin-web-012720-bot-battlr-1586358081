@@ -12,7 +12,8 @@ class YourBotArmy extends Component {
                 <BotCard
                   key={bot.id}
                   bot={bot}
-                  handleClick={this.handleClick}
+                  handleClick={this.props.removeFromArmy}
+                  handleDestroy={this.props.handleDestroy}
                 />
               );
             })}

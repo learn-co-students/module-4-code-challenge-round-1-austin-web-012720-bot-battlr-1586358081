@@ -5,20 +5,17 @@ import BotCollection from "./BotCollection";
 const URL = "http://localhost:6001/bots";
 
 class BotsPage extends Component {
-  //start here with your code for step one
   constructor() {
     super();
 
     this.state = {
       bots: [],
-      botArmy: [],
     };
   }
 
   componentDidMount() {
     this.fetchBots();
     console.log("Component mounted...");
-    console.log(this.state.bots);
   }
 
   fetchBots = () => {
@@ -31,24 +28,39 @@ class BotsPage extends Component {
   };
 
   addToArmy = (bot) => {
-    this.setState({ botArmy: [...this.state.botArmy, bot ]})
-    console.log(this.props.botArmy)
+    console.log("Adding to Army...", bot.id);
+    this.setState({
+      bots: this.state.bots.map((robot) =>
+        robot.id === bot.id ? { ...robot, enlisted: true } : robot
+      ),
+    });
+  };
 
+  removeFromArmy = (bot) => {
+    console.log("Removing from Army...", bot.id);
+    this.setState({
+      bots: this.state.bots.map((robot) =>
+        robot.id === bot.id ? { ...robot, enlisted: false } : robot
+      ),
+    });
+  };
+
+  handleDestroy = (bot) => {
+    console.log("Destroying...", bot.id)
+    const newBots = this.state.bots.filter((robot) => robot.id !== bot.id);
+    this.setState({ bots: newBots });
   };
 
   render() {
-    console.log(this.state.bots);
     return (
       <div>
         <YourBotArmy
-          bots={this.state.bots}
-          botArmy={this.state.botArmy}
-          addToArmy={this.addToArmy}
+          bots={this.state.bots.filter((robot) => robot.enlisted)}
+          removeFromArmy={this.removeFromArmy}
+          handleDestroy={this.handleDestroy}
         />
-        <BotCollection
-          bots={this.state.bots}
-          botArmy={this.state.botArmy}
-          addToArmy={this.addToArmy}
+        <BotCollection bots={this.state.bots} addToArmy={this.addToArmy} 
+        handleDestroy={this.handleDestroy}
         />
       </div>
     );
