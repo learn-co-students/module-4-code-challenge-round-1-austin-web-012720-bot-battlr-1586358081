@@ -11,24 +11,13 @@ const botTypeClasses = {
 
 const BotCard = props => {
 
-  const handleClickCard = (e) => {
-    // prevents a bot that wasn't in the army
-    // from being added when the delete button
-    // is pressed.
-    if(e.target.name === 'delete'){
-      props.handleDeleteBot(props.bot)
-    } else {
-      props.handleClickCard(props.bot)
-    }
-  }
-
   // console.log(props)
   return (
     <div className="ui column">
       <div
         className="ui card"
         key={props.bot.id}
-        onClick={handleClickCard}
+        onClick={() => props.handleClickCard(props.bot)}
       >
         <div className="image">
           <img alt="oh no!" src={props.bot.avatar_url} />
@@ -61,7 +50,10 @@ const BotCard = props => {
               <button
                 name="delete"
                 className="ui mini red button"
-                onClick={this.handleClickCard}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  props.handleDeleteBot(props.bot)
+                }}
               >
                 x
               </button>

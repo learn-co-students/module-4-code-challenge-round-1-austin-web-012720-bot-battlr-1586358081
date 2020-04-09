@@ -23,9 +23,7 @@ class BotsPage extends Component {
   //start here with your code for step one
   state = {
     bots: [],
-    army: [],
     filters: [],
-    specsBot: null,
   }
 
   fetchBots = () => {
@@ -36,8 +34,6 @@ class BotsPage extends Component {
   }
 
   deleteBot = (bot) => {
-    this.removeFromArmy(bot);
-
     fetch(`${BOTS_URL}/${bot.id}`, {
       method: 'DELETE'
     })
@@ -54,25 +50,9 @@ class BotsPage extends Component {
     }
   }
 
-  inspectBot = (specsBot) => {
-    this.setState({ specsBot })
-  }
-
-  addToArmy = (bot) => {
-    let army = this.state.army;
-    if (bot && !this.state.army.includes(bot)) {
-      army = [...this.state.army, bot];
-    }
-    this.setState({
-      army,
-      specsBot: null
-    })
-  }
-
-  removeFromArmy = (removeBot) => {
-    console.log('remove from army', removeBot)
-    const army = this.state.army.filter(bot => bot !== removeBot)
-    this.setState({ army })
+  adjustArmy = (bot, tf) => {
+    const bots = this.state.bots.map(b => bot.id === b.id ? { ...b, enlisted: tf } : b)
+    this.setState({ bots });
   }
 
   componentDidMount() {
@@ -82,7 +62,7 @@ class BotsPage extends Component {
 
   render() {
     return <div>
-      <YourBotArmy bots={this.state.army} handleClickCard={this.removeFromArmy} handleDeleteBot={this.deleteBot} />
+      <YourBotArmy bots={this.state.bots.filter(bot => bot.enlisted)} handleClickCard={(bot) => this.adjustArmy(bot, false)} handleDeleteBot={this.deleteBot} />
       <SortBar
         handleFilter={(e) => this.setState({
           filters:
@@ -91,10 +71,7 @@ class BotsPage extends Component {
               this.state.filters.filter(botType => botType !== e.target.name)
         })}
       />
-      {this.state.specsBot ?
-        <BotSpecs bot={this.state.specsBot} addToArmy={this.addToArmy} /> :
-        <BotCollection bots={this.filteredBots()} handleClickCard={this.inspectBot} handleDeleteBot={this.deleteBot} />
-      }
+      <BotCollection bots={this.filteredBots()} addToArmy={(bot) => this.adjustArmy(bot, true)} handleDeleteBot={this.deleteBot} />
     </div>
   }
 }
