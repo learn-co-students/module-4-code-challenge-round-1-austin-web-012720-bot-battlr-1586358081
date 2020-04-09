@@ -46,7 +46,7 @@ class BotsPage extends Component {
   };
 
   handleDestroy = (bot) => {
-    console.log("Destroying...", bot.id)
+    console.log("Destroying...", bot.id);
     const newBots = this.state.bots.filter((robot) => robot.id !== bot.id);
     this.setState({ bots: newBots });
   };
@@ -59,8 +59,10 @@ class BotsPage extends Component {
           removeFromArmy={this.removeFromArmy}
           handleDestroy={this.handleDestroy}
         />
-        <BotCollection bots={this.state.bots} addToArmy={this.addToArmy} 
-        handleDestroy={this.handleDestroy}
+        <BotCollection
+          bots={this.state.bots}
+          addToArmy={this.addToArmy}
+          handleDestroy={this.handleDestroy}
         />
       </div>
     );

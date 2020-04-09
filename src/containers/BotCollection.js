@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import BotCard from "../components/BotCard";
 
 class BotCollection extends Component {
-
   render() {
     return (
       <div className="ui four column grid">
